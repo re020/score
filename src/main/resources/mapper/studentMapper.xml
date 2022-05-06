@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.score.dao.StudentMapper">
+    <!-- sql语句-->
+    <resultMap id="BaseResultMap" type="com.example.score.entity.ClassTeacher">
+        <id column="id" property="ctId"/>
+        <result column="class_id" property="classId"/>
+        <result column="teacher_id" property="teId"/>
+        <result column="academic_year" property="acaYear"/>
+    </resultMap>
+
+    <resultMap id="TeMap" type="com.example.score.entity.Teacher">
+        <id column="id" property="teId"/>
+        <result column="te_number" property="teNum"/>
+        <result column="name" property="teName"/>
+        <result column="password" property="passWd"/>
+        <result column="college_id" property="collegeId"/>
+    </resultMap>
+
+    <resultMap id="stuMap" type="com.example.score.entity.Student">
+        <id column="id" property="teId"/>
+        <result column="sno" property="stuNum"/>
+        <result column="password" property="passWd"/>
+        <result column="name" property="teName"/>
+        <result column="class_id" property="classId"/>
+    </resultMap>
+
+    <resultMap id="stu" type="com.example.score.entity.Student">
+        <id column="id" property="stuId"/>
+        <result column="sno" property="stuNum"/>
+        <result column="password" property="passWd"/>
+        <result column="name" property="stuName"/>
+        <result column="class_id" property="classId"/>
+    </resultMap>
+
+    <sql id="student">
+        id, sno, password, name, class_id
+    </sql>
+
+    <select id="getStudentByUsername" resultMap="stu">
+        SELECT <include refid="student"/>
+        FROM student
+        WHERE sno = #{sno}
+    </select>
+
+    <select id="selectTe" resultMap="BaseResultMap" >
+        select * from class_teacher
+        where class_id = #{classId}
+        AND academic_year = #{acaYear}
+        AND seme = #{seme}
+    </select>
+
+    <select id="selectTeName" resultMap="TeMap">
+        select name from teacher where id=#{teId}
+    </select>
+
+    <select id="getStuPassWd" resultType="string">
+        select password from student where sno = #{stuNum}
+    </select>
+
+    <select id="getClassIdByStuId" resultType="int">
+        select class_id from student where sno = #{stuNum}
+    </select>
+
+    <select id="getByStuNum" resultType="com.example.score.entity.AllScore">
+        select id as stuId , class_id as classId
+        from student
+        where sno = #{stuNum}
+    </select>
+
+
+</mapper>

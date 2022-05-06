@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.score.dao.ClassMapper">
+    <!-- sql语句-->
+    <resultMap id="clMap" type="com.example.score.entity.Class">
+        <id column="id" property="classId"/>
+        <result column="name" property="className"/>
+        <result column="college_id" property="collegeId"/>
+    </resultMap>
+    <select id="getClassList" resultMap="clMap">
+        select id
+        from class
+    </select>
+
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.score.dao.TeacherMapper">
+    <!-- sql语句-->
+    <resultMap id="TeClassMap" type="com.example.score.entity.FinalScore">
+        <id column="id" property="fsId"/>
+        <result column="class_id" property="classId"/>
+        <result column="college_id" property="collegeId"/>
+        <result column="teacher_id" property="teId"/>
+        <result column="teacher_score" property="teScore"/>
+        <result column="academic_year" property="acaYear"/>
+    </resultMap>
+    <resultMap id="TeCollegeMap" type="com.example.score.entity.CollegeScore">
+        <id column="id" property="csId"/>
+        <result column="college_id" property="collegeId"/>
+        <result column="teacher_id" property="teId"/>
+        <result column="teacher_score" property="teScore"/>
+        <result column="academic_year" property="acaYear"/>
+    </resultMap>
+    <resultMap id="TeMap" type="com.example.score.entity.Teacher">
+        <id column="id" property="teId"/>
+        <result column="name" property="teName"/>
+        <result column="te_number" property="teNum"/>
+        <result column="password" property="passwd"/>
+        <result column="college_id" property="collegeId"/>
+    </resultMap>
+    <resultMap id="SuMap" type="com.example.score.dto.Subject">
+        <result column="name" property="teacher"/>
+        <!--<result column="" property="subject"/>-->
+    </resultMap>
+
+
+    <select id="selectClassRanking" resultMap="TeClassMap">
+        select * from final_score
+        inner join class
+        on class.id =  final _score.class_id
+        where  class.name= #{clName}
+        and academic_year = #{acaYear}
+        and seme = #{seme}
+    </select>
+
+    <select id="selectCollegeRanking" resultMap="TeCollegeMap">
+        select * from final_score
+        where college_id = #{collegeId}
+        and academic_year = #{acaYear}
+        and seme = #{seme}
+    </select>
+
+    <insert id="insert" >
+        insert into college_te_score
+        value (#{csId},#{collegeId},#{teId},#{teScore},#{acaYear},#{seme})
+    </insert>
+
+    <select id="getTeIds" resultMap="TeMap">
+        select id from teacher
+    </select>
+
+    <select id="selectClassScores" resultMap="TeClassMap">
+        select * from final_score
+        where te_id = #{teId}
+          and academic_year = #{acaYear}
+          and seme = #{seme}
+    </select>
+
+    <select id="getTePassWd" resultMap="TeMap">
+        select password from teacher where te_number = #{teNum}
+    </select>
+
+    <select id="getTeCollegeId" resultMap="TeMap">
+        select college_id from teacher where id = #{teId}
+    </select>
+
+    <select id="getClassIdByTeNum" resultType="String">
+        select class.name
+        from (class_teacher
+        inner join  class
+        on class.id = class_teacher.class_id)
+        inner join  teacher
+        on class_teacher.teacher_id = teacher.id
+        where te_number = #{teNum}
+        and academic_year = #{acaYear}
+        and seme = #{seme}
+    </select>
+
+
+
+    <select id="getTeList" resultType="String">
+        SELECT teacher.`name`,class_teacher.`subject`
+        FROM teacher
+        INNER JOIN class_teacher
+        ON teacher.id = class_teacher.teacher_id
+        WHERE class_teacher.class_id = #{classId}
+          AND class_teacher.academic_year = #{acaYear}
+          AND seme = #{seme}
+    </select>
+
+    <select id="geTeClassScore" resultType="com.example.score.dto.ClassScoreDTO">
+        select teacher_score as teScore,
+               teacher.name AS teName,
+               class.name  as clName
+        from (class
+        inner join te_score
+        on class.id = te_score.class_id)
+        inner join teacher
+        on teacher.id=te_score.teacher_id
+        WHERE class.name = #{clName}
+          AND te_score.academic_year = #{acaYear}
+          AND seme = #{seme}
+    </select>
+
+        <select id="getCollegeIdByTeNum" resultType="Integer">
+            select college_id from teacher where te_number = #{teNum}
+        </select>
+
+    <select id="geTeCollegeScore" resultType="com.example.score.dto.CollegeScoreDTO">
+        select teacher_score as teScore,
+               teacher.name  as teName
+        from college_te_score
+        inner join teacher
+        on teacher.id = college_te_score.teacher_id
+        WHERE college_te_score.college_id = #{collegeId}
+          AND college_te_score.academic_year = #{acaYear}
+          AND seme = #{seme}
+    </select>
+
+    <select id="getTeIdByTeName" resultType="Integer">
+        select id from teacher where name = #{teName}
+    </select>
+
+
+    <resultMap id="teacher" type="com.example.score.entity.Teacher">
+        <id column="id" property="teId"/>
+        <result column="tno" property="teNum"/>
+        <result column="password" property="passWd"/>
+        <result column="name" property="teName"/>
+        <result column="college_id" property="collegeId"/>
+    </resultMap>
+
+    <sql id="teacherSql">
+        id, tno, name, password, college_id
+    </sql>
+
+    <select id="getTeacherByName" resultMap="teacher">
+        SELECT <include refid="teacherSql"/>
+        FROM teacher
+        WHERE tno = #{tno}
+    </select>
+</mapper>
