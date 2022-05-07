@@ -41,19 +41,19 @@ public class EnDoserviceImpl implements EnDoService {
         acaYears.add("2020-2022");
         acaYears.add("2018-2019");*/
         for (int classId : classList) {
-                    List<TeScore> teScores = enDoScoreService.enDoScore(classId, acaYear, seme);
-
-                    for (TeScore teScore : teScores) {
-                        finalScoreService.insertScore(teScore);
+            List<TeScore> teScores = enDoScoreService.enDoScore(classId, acaYear, seme);
+            for (TeScore teScore : teScores) {
+                finalScoreService.insertScore(teScore);
             }
-            collegeScoreService.insertCollegeScores(acaYear,seme);
         }
+        collegeScoreService.insertCollegeScores(acaYear,seme);
     }
 
     @Override
     public void insetTeScore( String acaYear,int seme) {
 
         List<ClassTeacher> select = classTeService.select(acaYear,seme);
+        System.out.println(select.size());
         for (ClassTeacher classTeacher : select) {
 
             int teId = classTeacher.getTeId();

@@ -33,6 +33,8 @@ public class EnDoTest {
     private TeScoreService teScoreService;
     @Autowired
     private CollegeScoreService collegeScoreService;
+    @Autowired
+    private EnDoService enDoService;
 
     @Test
     public void test1(){
@@ -104,5 +106,10 @@ public class EnDoTest {
     @Test
     public void test7(){
         collegeScoreService.insertCollegeScores("2021-2022",1);
+    }
+
+    @Test
+    public void test8(){
+        enDoService.insertEnDoScore("2021-2022",1);
     }
 }

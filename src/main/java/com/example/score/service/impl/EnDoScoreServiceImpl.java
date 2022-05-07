@@ -48,35 +48,37 @@ public class EnDoScoreServiceImpl implements EnDoScoreService {
         BigDecimal x1 = new BigDecimal("1");
         BigDecimal x2 = new BigDecimal("1");
         System.out.println(teScores.size()+":size");
-        System.out.println(teScores.get(0));
-        BigDecimal max = teScores.get(0).getTeScore().add(x1);
-        BigDecimal min = teScores.get(teScores.size()-1).getTeScore().subtract(x2);
-        System.out.println("max:"+max+"min:"+min);
+       // System.out.println(teScores.get(0));
+        if(teScores.size()>0){
+            BigDecimal max = teScores.get(0).getTeScore().add(x1);
+            BigDecimal min = teScores.get(teScores.size()-1).getTeScore().subtract(x2);
+            System.out.println("max:"+max+"min:"+min);
 
-        //设置赋分区间
-        BigDecimal fmax = new BigDecimal("100");
-        BigDecimal fmin = new BigDecimal("98");
+            //设置赋分区间
+            BigDecimal fmax = new BigDecimal("100");
+            BigDecimal fmin = new BigDecimal("98");
 
-        //基于赋分制的教学质量评价系统
-        //给每个教师赋分
-        for (int i = 0; i < teScores.size(); i++) {
+            //基于赋分制的教学质量评价系统
+            //给每个教师赋分
+            for (int i = 0; i < teScores.size(); i++) {
 
-            BigDecimal score = teScores.get(i).getTeScore();
+                BigDecimal score = teScores.get(i).getTeScore();
 
-            //BigDecimal a = fmax*(score-min)+fmin*(max-score);
-            BigDecimal a = fmax.multiply(score.subtract(min)).add(fmin.multiply(max.subtract(score)));
-            //BigDecimal b = a/(max-min);
-            BigDecimal b = a.divide(max.subtract(min),2);
+                //BigDecimal a = fmax*(score-min)+fmin*(max-score);
+                BigDecimal a = fmax.multiply(score.subtract(min)).add(fmin.multiply(max.subtract(score)));
+                //BigDecimal b = a/(max-min);
+                BigDecimal b = a.divide(max.subtract(min),2);
 
-            BigDecimal finalScore = b.setScale(2, RoundingMode.HALF_DOWN);
+                BigDecimal finalScore = b.setScale(2, RoundingMode.HALF_DOWN);
 
-            teScores.get(i).setTeScore(finalScore);
+                teScores.get(i).setTeScore(finalScore);
+            }
+            for (TeScore teScore : teScores) {
+
+                System.out.println(teScore);
+            }
+
         }
-        for (TeScore teScore : teScores) {
-
-            System.out.println(teScore);
-        }
-
         return  teScores;
     }
 
