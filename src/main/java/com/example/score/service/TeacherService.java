@@ -4,9 +4,7 @@ import com.example.score.dao.TeacherMapper;
 import com.example.score.dto.ClassScoreDTO;
 import com.example.score.dto.CollegeScoreDTO;
 import com.example.score.dto.Subject;
-import com.example.score.entity.CollegeScore;
-import com.example.score.entity.TeScore;
-import com.example.score.entity.Teacher;
+import com.example.score.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -53,7 +51,7 @@ public interface TeacherService {
      * @param seme
      * @return
      */
-    public List<TeScore> getClassScores(int teId,String acaYear,int seme);
+    public List<FinalScore> getClassScores(int teId, String acaYear, int seme);
 
     /**
      * 获取教师用户密码

@@ -30,9 +30,16 @@ public class StudentScoreController {
 
     @RequestMapping("/getTeList")
     @ResponseBody
-    public String getTeList(@RequestBody ClassDTO classDTO) {
-        List<ClassScoreDTO> classScore = teacherService.geTeClassScore(classDTO.getClName(), classDTO.getAcaYear(), classDTO.getSeme());
-        return JSON.toJSONString(classScore);
+    public String getTeList(@RequestBody StudentDTO studentDTO) {
+        //List<ClassScoreDTO> classScore = teacherService.geTeClassScore(classDTO.getClName(), classDTO.getAcaYear(), classDTO.getSeme());
+        //studentService.
+        //return JSON.toJSONString(classScore);
+        Integer classId = studentService.getClassIdByStuId(studentDTO.getStuNum());
+        List<Subject> teList = teacherService.getTeList(classId, studentDTO.getAcaYear(), studentDTO.getSeme());
+        for (Subject subject : teList) {
+            System.out.println(subject);
+        }
+        return JSON.toJSONString(teList);
     }
 
     @RequestMapping("/insertAllScore")

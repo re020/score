@@ -30,25 +30,23 @@ public class EnDoserviceImpl implements EnDoService {
     private TeacherService teacherService;
 
     @Override
-    public void insertEnDoScore() {
+    public void insertEnDoScore(String acaYear ,int seme ) {
         List<Integer> classList = classService.getClassList();
-        List<String> acaYears = new ArrayList<>();
-        acaYears.add("2019-2020");
+        for (Integer integer : classList) {
+            System.out.println(integer);
+        }
+
+      /*  acaYears.add("2019-2020");
         acaYears.add("2020-2021");
         acaYears.add("2020-2022");
-        acaYears.add("2018-2019");
-        for (Integer classId : classList) {
-            for (String acaYear : acaYears) {
-                for (int seme = 1; seme <= 2; seme++) {
-
+        acaYears.add("2018-2019");*/
+        for (int classId : classList) {
                     List<TeScore> teScores = enDoScoreService.enDoScore(classId, acaYear, seme);
 
                     for (TeScore teScore : teScores) {
                         finalScoreService.insertScore(teScore);
-                    }
-                    collegeScoreService.insertCollegeScores();
-                }
             }
+            collegeScoreService.insertCollegeScores(acaYear,seme);
         }
     }
 
@@ -64,24 +62,34 @@ public class EnDoserviceImpl implements EnDoService {
             int seme1 = classTeacher.getSeme();*/
             List<AllScore> allScores = teScoreService.selectScore(teId, classId, acaYear, seme);
             BigDecimal sum = new BigDecimal("0");
-            BigDecimal i = new BigDecimal("1");
+            BigDecimal i = new BigDecimal("0");
             BigDecimal j = new BigDecimal("1");
             for (AllScore allscore : allScores) {
                 sum=sum.add(allscore.getTeScore());
                 i = i.add(j);
             }
-            BigDecimal teScore = sum.divide(i, 2);
-            int collegeId = teacherService.getTeCollegeId(teId);
-            TeScore ts = new TeScore();
-            ts.setTsId(allScores.get(0).getAsId());
-            ts.setClassId(classId);
-            ts.setCollegeId(collegeId);
-            ts.setTeId(teId);
-            ts.setTeScore(teScore);
-            ts.setAcaYear(acaYear);
-            ts.setSeme(seme);
+            if(i.compareTo(new BigDecimal("0"))==1){
+                BigDecimal teScore = sum.divide(i, 2);
+                int collegeId = teacherService.getTeCollegeId(teId);
+                if(sum.compareTo(new BigDecimal("0")) == 1){
+                    TeScore ts = new TeScore();
 
-            teScoreService.insertTeScore(ts);
+                    //ts.setTsId(allScores.get(0).getAsId());
+                    ts.setClassId(classId);
+                    ts.setCollegeId(collegeId);
+                    ts.setTeId(teId);
+                    ts.setTeScore(teScore);
+                    ts.setAcaYear(acaYear);
+                    ts.setSeme(seme);
+
+                    System.out.println(ts);
+
+                    teScoreService.insertTeScore(ts);
+                }
+
+            }
+
+
         }
 
     }

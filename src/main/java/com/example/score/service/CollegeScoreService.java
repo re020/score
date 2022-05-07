@@ -8,6 +8,6 @@ public interface CollegeScoreService {
     /**
      * 处理final_te_score中的教师评分
      */
-    public void insertCollegeScores();
+    public void insertCollegeScores(String acaYear,int seme);
 
 }

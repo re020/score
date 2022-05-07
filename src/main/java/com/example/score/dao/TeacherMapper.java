@@ -4,6 +4,7 @@ import com.example.score.dto.ClassScoreDTO;
 import com.example.score.dto.CollegeScoreDTO;
 import com.example.score.dto.Subject;
 import com.example.score.entity.CollegeScore;
+import com.example.score.entity.FinalScore;
 import com.example.score.entity.TeScore;
 import com.example.score.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
@@ -53,7 +54,7 @@ public interface TeacherMapper {
      * @param seme
      * @return
      */
-    List<TeScore> selectClassScores(@Param("teId") int teId,@Param("acaYear") String acaYear,@Param("seme") int seme);
+    List<FinalScore> selectClassScores(@Param("teId") int teId, @Param("acaYear") String acaYear, @Param("seme") int seme);
 
 
     /**

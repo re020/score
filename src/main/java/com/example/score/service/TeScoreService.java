@@ -35,7 +35,11 @@ public class TeScoreService {
         return teScoreMapper.selectScore(teId,classId,acaYear,seme);
     }
 
-    public int insertTeScore(TeScore teScore){
+    public Integer insertTeScore(TeScore teScore){
         return teScoreMapper.insertTeScore(teScore);
+    }
+
+    public Integer insertFinalScore(TeScore teScore){
+        return teScoreMapper.insertFinalScore(teScore);
     }
 }

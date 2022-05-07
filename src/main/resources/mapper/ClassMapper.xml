@@ -10,7 +10,7 @@
         <result column="name" property="className"/>
         <result column="college_id" property="collegeId"/>
     </resultMap>
-    <select id="getClassList" resultMap="clMap">
+    <select id="getClassList" resultType="int">
         select id
         from class
     </select>

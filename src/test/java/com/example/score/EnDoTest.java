@@ -31,6 +31,8 @@ public class EnDoTest {
     private TeacherService teacherService;
     @Autowired
     private TeScoreService teScoreService;
+    @Autowired
+    private CollegeScoreService collegeScoreService;
 
     @Test
     public void test1(){
@@ -97,5 +99,10 @@ public class EnDoTest {
         allScore.setSeme(allScoreDTO.getSeme());
         allScore.setTeId(teId);
         teScoreService.insertAllScore(allScore);
+    }
+
+    @Test
+    public void test7(){
+        collegeScoreService.insertCollegeScores("2021-2022",1);
     }
 }

@@ -24,17 +24,18 @@
         <id column="id" property="teId"/>
         <result column="name" property="teName"/>
         <result column="te_number" property="teNum"/>
-        <result column="password" property="passwd"/>
+        <result column="password" property="passWd"/>
         <result column="college_id" property="collegeId"/>
     </resultMap>
     <resultMap id="SuMap" type="com.example.score.dto.Subject">
         <result column="name" property="teacher"/>
+        <result column="id" property="teId"/>
         <!--<result column="" property="subject"/>-->
     </resultMap>
 
 
     <select id="selectClassRanking" resultMap="TeClassMap">
-        select * from final_score
+        select * from final_te_score
         inner join class
         on class.id =  final _score.class_id
         where  class.name= #{clName}
@@ -43,33 +44,35 @@
     </select>
 
     <select id="selectCollegeRanking" resultMap="TeCollegeMap">
-        select * from final_score
+        select * from final_te_score
         where college_id = #{collegeId}
         and academic_year = #{acaYear}
         and seme = #{seme}
     </select>
 
     <insert id="insert" >
-        insert into college_te_score
-        value (#{csId},#{collegeId},#{teId},#{teScore},#{acaYear},#{seme})
+        insert
+        into college_te_score
+            (teacher_id,college_id,teacher_score,academic_year,seme)
+            value( #{teId},#{collegeId},#{teScore},#{acaYear},#{seme})
     </insert>
 
-    <select id="getTeIds" resultMap="TeMap">
+    <select id="getTeIds" resultType="int">
         select id from teacher
     </select>
 
     <select id="selectClassScores" resultMap="TeClassMap">
-        select * from final_score
-        where te_id = #{teId}
+        select * from final_te_score
+        where teacher_id = #{teId}
           and academic_year = #{acaYear}
           and seme = #{seme}
     </select>
 
-    <select id="getTePassWd" resultMap="TeMap">
+    <select id="getTePassWd" resultType="String">
         select password from teacher where te_number = #{teNum}
     </select>
 
-    <select id="getTeCollegeId" resultMap="TeMap">
+    <select id="getTeCollegeId" resultType="Integer">
         select college_id from teacher where id = #{teId}
     </select>
 
@@ -87,8 +90,8 @@
 
 
 
-    <select id="getTeList" resultType="String">
-        SELECT teacher.`name`,class_teacher.`subject`
+    <select id="getTeList" resultMap="SuMap">
+        SELECT teacher.`name`,class_teacher.`subject`,teacher.id
         FROM teacher
         INNER JOIN class_teacher
         ON teacher.id = class_teacher.teacher_id

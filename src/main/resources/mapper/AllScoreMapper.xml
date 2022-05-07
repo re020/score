@@ -7,7 +7,7 @@
     <!-- sql语句-->
 
     <resultMap id="AsMap" type="com.example.score.entity.AllScore">
-        <id column="id" property="csId"/>
+        <id column="id" property="asId"/>
         <result column="class_id" property="classId"/>
         <result column="teacher_id" property="teId"/>
         <result column="student_id" property="stuId"/>
@@ -36,9 +36,18 @@
         And academic_year = #{acaYear}
         and seme = #{seme}
     </select>
+    <select id="insertFinalScore">
+        insert
+        into final_te_score
+            (class_id,teacher_id,college_id,teacher_score,academic_year,seme)
+            value (#{classId},#{teId},#{collegeId},#{teScore},#{acaYear},#{seme})
+    </select>
+
     <select id="insertTeScore">
-        insert into final_te_score
-            value (#{tsId},#{classId},#{collegeId},#{teId},#{teScore},#{acaYear},#{seme})
+        insert
+        into te_score
+            (class_id,teacher_id,college_id,teacher_score,academic_year,seme)
+            value (#{classId},#{teId},#{collegeId},#{teScore},#{acaYear},#{seme})
     </select>
 
    <!-- <insert id="insertTeScore">

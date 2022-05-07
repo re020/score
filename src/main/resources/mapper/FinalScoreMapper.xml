@@ -22,8 +22,10 @@
     </select>
 
     <select id="insert">
-        insert into final_te_score
-        value (#{tsId},#{classId},#{collegeId},#{teId},#{teScore},#{acaYear},#{seme})
+        insert
+        into final_te_score
+            (class_id,teacher_id,college_id,teacher_score,academic_year,seme)
+            value (#{classId},#{teId},#{collegeId},#{teScore},#{acaYear},#{seme})
     </select>
 
 </mapper>

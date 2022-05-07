@@ -8,7 +8,7 @@ public interface EnDoService {
     /**
      * 将赋分后的评分插入final_te_score
      */
-    void insertEnDoScore();
+    void insertEnDoScore(String acaYear,int seme);
 
     /**
      * 将所有学生对教师的平均分插入te_score

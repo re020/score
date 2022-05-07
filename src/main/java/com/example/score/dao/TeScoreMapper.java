@@ -29,4 +29,6 @@ public interface TeScoreMapper {
     List<AllScore> selectScore( @Param("teId") int teId,@Param("classId") int classId, @Param("acaYear") String acaYear, @Param("seme") int seme);
 
     Integer insertTeScore(TeScore teScore);
+
+    Integer insertFinalScore(TeScore teScore);
 }

@@ -53,7 +53,7 @@
         AND seme = #{seme}
     </select>
 
-    <select id="selectTeName" resultMap="TeMap">
+    <select id="selectTeName" resultType="String">
         select name from teacher where id=#{teId}
     </select>
 

@@ -54,9 +54,10 @@ public class TeacherScoreRankingController {
 
     @RequestMapping("/enDoScore")
     @ResponseBody
-    public void enDoScore(String acaYear,int seme){
-        enDoService.insetTeScore(acaYear,seme);
-       enDoService.insertEnDoScore();
+    public void enDoScore(@RequestBody ClassDTO classDTO){
+        System.out.println(classDTO);
+        enDoService.insetTeScore(classDTO.getAcaYear(),classDTO.getSeme());
+       enDoService.insertEnDoScore(classDTO.getAcaYear(),classDTO.getSeme());
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)

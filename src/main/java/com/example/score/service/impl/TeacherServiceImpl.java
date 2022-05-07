@@ -4,10 +4,7 @@ import com.example.score.dao.TeacherMapper;
 import com.example.score.dto.ClassScoreDTO;
 import com.example.score.dto.CollegeScoreDTO;
 import com.example.score.dto.Subject;
-import com.example.score.entity.CollegeScore;
-import com.example.score.entity.TeScore;
-import com.example.score.entity.Teacher;
-import com.example.score.entity.User;
+import com.example.score.entity.*;
 import com.example.score.service.TeacherService;
 import com.example.score.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +67,7 @@ public class TeacherServiceImpl implements TeacherService, UserService {
      * @param seme
      * @return
      */
-    public List<TeScore> getClassScores(int teId,String acaYear,int seme){
+    public List<FinalScore> getClassScores(int teId, String acaYear, int seme){
         return teacherMapper.selectClassScores(teId,acaYear,seme);
     }
 

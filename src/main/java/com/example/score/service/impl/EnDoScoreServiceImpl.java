@@ -47,6 +47,8 @@ public class EnDoScoreServiceImpl implements EnDoScoreService {
         //获取原始分区间
         BigDecimal x1 = new BigDecimal("1");
         BigDecimal x2 = new BigDecimal("1");
+        System.out.println(teScores.size()+":size");
+        System.out.println(teScores.get(0));
         BigDecimal max = teScores.get(0).getTeScore().add(x1);
         BigDecimal min = teScores.get(teScores.size()-1).getTeScore().subtract(x2);
         System.out.println("max:"+max+"min:"+min);
