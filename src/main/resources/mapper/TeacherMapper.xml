@@ -105,12 +105,12 @@
                teacher.name AS teName,
                class.name  as clName
         from (class
-        inner join te_score
-        on class.id = te_score.class_id)
+        inner join final_te_score
+        on class.id = final_te_score.class_id)
         inner join teacher
-        on teacher.id=te_score.teacher_id
+        on teacher.id=final_te_score.teacher_id
         WHERE class.name = #{clName}
-          AND te_score.academic_year = #{acaYear}
+          AND final_te_score.academic_year = #{acaYear}
           AND seme = #{seme}
     </select>
 

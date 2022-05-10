@@ -22,6 +22,8 @@ public class TeacherScoreRankingController {
     @Autowired
     private EnDoService enDoService;
     @Autowired
+    private TeScoreService teScoreService;
+    @Autowired
     private RedisTemplate redisTemplate;
 
 
@@ -75,6 +77,20 @@ public class TeacherScoreRankingController {
     public String getClassList(@RequestBody TeacherDTO teacherDTO){
         List<Integer> classList = teacherService.getClassIdByTeNum(teacherDTO.getTeNum(),teacherDTO.getAcaYear(),teacherDTO.getSeme());
         return JSON.toJSONString(classList);
+    }
+
+    @RequestMapping("/getFirstScore")
+    @ResponseBody
+    public String getFirstScore(@RequestBody ClassDTO classDTO){
+        List<ClassScoreDTO> score = teScoreService.getScore(classDTO.getClName(), classDTO.getAcaYear(), classDTO.getSeme());
+        return JSON.toJSONString(score);
+    }
+
+    @RequestMapping("/getAllClassList")
+    @ResponseBody
+    public String getAllClassList(){
+        List<String> clNames = teScoreService.getClNames();
+        return  JSON.toJSONString(clNames);
     }
 }
 

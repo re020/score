@@ -1,6 +1,7 @@
 package com.example.score.service;
 
 import com.example.score.dao.TeScoreMapper;
+import com.example.score.dto.ClassScoreDTO;
 import com.example.score.entity.AllScore;
 import com.example.score.entity.TeScore;
 import org.apache.ibatis.annotations.Param;
@@ -41,5 +42,13 @@ public class TeScoreService {
 
     public Integer insertFinalScore(TeScore teScore){
         return teScoreMapper.insertFinalScore(teScore);
+    }
+
+    public List<String> getClNames(){
+        return teScoreMapper.getClNames();
+    }
+
+    public List<ClassScoreDTO> getScore(String clName , String acaYear , int seme){
+        return teScoreMapper.geScore(clName,acaYear,seme);
     }
 }

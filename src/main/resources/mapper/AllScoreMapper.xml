@@ -50,10 +50,29 @@
             value (#{classId},#{teId},#{collegeId},#{teScore},#{acaYear},#{seme})
     </select>
 
-   <!-- <insert id="insertTeScore">
-        insert id,class_id,teacher_id,student_id,teacher_score,academic_year,seme
-         into all_score value (#{as.asId},#{as.classId},#{as.teId},#{as.stuId},#{as.teScore},
-                                    #{as.acaYear},#{as.seme})
-    </insert>
--->
+    <select id="getClNames"  resultType="String">
+        select name from class
+    </select>
+
+    <select id="geScore" resultType="com.example.score.dto.ClassScoreDTO">
+        select teacher_score as teScore,
+               teacher.name AS teName,
+               class.name  as clName
+        from (class
+            inner join te_score
+            on class.id = te_score.class_id)
+                 inner join teacher
+                            on teacher.id=te_score.teacher_id
+        WHERE class.name = #{clName}
+          AND te_score.academic_year = #{acaYear}
+          AND seme = #{seme}
+    </select>
+
+
+    <!-- <insert id="insertTeScore">
+         insert id,class_id,teacher_id,student_id,teacher_score,academic_year,seme
+          into all_score value (#{as.asId},#{as.classId},#{as.teId},#{as.stuId},#{as.teScore},
+                                     #{as.acaYear},#{as.seme})
+     </insert>
+ -->
 </mapper>

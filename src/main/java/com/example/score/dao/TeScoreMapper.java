@@ -1,5 +1,6 @@
 package com.example.score.dao;
 
+import com.example.score.dto.ClassScoreDTO;
 import com.example.score.entity.AllScore;
 
 import com.example.score.entity.TeScore;
@@ -31,4 +32,8 @@ public interface TeScoreMapper {
     Integer insertTeScore(TeScore teScore);
 
     Integer insertFinalScore(TeScore teScore);
-}
+
+    List<String> getClNames();
+
+    List<ClassScoreDTO> geScore(@Param("clName") String clName,@Param("acaYear") String acaYear,@Param("seme") int seme);
+ }
