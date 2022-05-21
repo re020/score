@@ -1,4 +1,4 @@
-package com.example.score.dto;
+package com.example.score.pojo.dto;
 
 import lombok.Data;
 

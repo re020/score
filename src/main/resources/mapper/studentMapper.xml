@@ -43,6 +43,8 @@
     <select id="getStudentByUsername" resultMap="stu">
         SELECT <include refid="student"/>
         FROM student
+        inner join class_student
+        on class_student.stu_id = student.id
         WHERE sno = #{sno}
     </select>
 
@@ -62,13 +64,19 @@
     </select>
 
     <select id="getClassIdByStuId" resultType="int">
-        select class_id from student where sno = #{stuNum}
+        select class_id
+        from student
+        inner join class_student
+        on class_student.stu_id = student.id
+        where student.sno = #{stuNum}
     </select>
 
     <select id="getByStuNum" resultType="com.example.score.entity.AllScore">
-        select id as stuId , class_id as classId
+        select student.id as stuId , class_student.class_id as classId
         from student
-        where sno = #{stuNum}
+        inner join class_student
+        on class_student.stu_id = student.id
+        where student.sno = #{stuNum}
     </select>
 
 

@@ -1,9 +1,9 @@
 package com.example.score.service.impl;
 
 import com.example.score.dao.TeacherMapper;
-import com.example.score.dto.ClassScoreDTO;
-import com.example.score.dto.CollegeScoreDTO;
-import com.example.score.dto.Subject;
+import com.example.score.pojo.dto.ClassScoreDTO;
+import com.example.score.pojo.dto.CollegeScoreDTO;
+import com.example.score.pojo.dto.Subject;
 import com.example.score.entity.*;
 import com.example.score.service.TeacherService;
 import com.example.score.service.UserService;

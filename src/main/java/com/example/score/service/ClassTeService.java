@@ -22,5 +22,19 @@ public class ClassTeService {
    }
 
 
+   public Integer classTeAdd(int classId, int teId){
+    return classTeMapper.classTeAdd(classId,teId);
+   }
 
+   public Integer subjectAdd(String subject , String acaYear , int seme,int classTeId){
+       return classTeMapper.subjectAdd(subject,acaYear,seme,classTeId);
+   }
+
+   public Integer classTeDelete(int classTeId){
+       return classTeMapper.classTeDelete(classTeId);
+   }
+
+   public List<ClassTeacher> getClassTeacher(int classId){
+       return classTeMapper.getClassTeacher(classId);
+   }
 }

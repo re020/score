@@ -1,7 +1,7 @@
 package com.example.score.service;
 
 import com.example.score.dao.MarkMapper;
-import com.example.score.dto.Subject;
+import com.example.score.pojo.dto.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

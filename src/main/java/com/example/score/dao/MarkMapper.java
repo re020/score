@@ -1,6 +1,6 @@
 package com.example.score.dao;
 
-import com.example.score.dto.Subject;
+import com.example.score.pojo.dto.Subject;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

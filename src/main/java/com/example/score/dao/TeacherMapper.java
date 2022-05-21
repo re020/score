@@ -1,8 +1,8 @@
 package com.example.score.dao;
 
-import com.example.score.dto.ClassScoreDTO;
-import com.example.score.dto.CollegeScoreDTO;
-import com.example.score.dto.Subject;
+import com.example.score.pojo.dto.ClassScoreDTO;
+import com.example.score.pojo.dto.CollegeScoreDTO;
+import com.example.score.pojo.dto.Subject;
 import com.example.score.entity.CollegeScore;
 import com.example.score.entity.FinalScore;
 import com.example.score.entity.TeScore;

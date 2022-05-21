@@ -1,18 +1,13 @@
 package com.example.score.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.example.score.dto.Subject;
-import com.example.score.entity.Student;
+import com.example.score.pojo.dto.Subject;
 import com.example.score.service.MarkService;
-import com.example.score.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class HelloController {

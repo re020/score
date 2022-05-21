@@ -1,9 +1,8 @@
 package com.example.score.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.example.score.dto.*;
+import com.example.score.pojo.dto.*;
 import com.example.score.entity.AllScore;
-import com.example.score.entity.Student;
 import com.example.score.service.StudentService;
 import com.example.score.service.TeScoreService;
 import com.example.score.service.TeacherService;

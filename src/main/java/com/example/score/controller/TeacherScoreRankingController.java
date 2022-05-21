@@ -1,9 +1,7 @@
 package com.example.score.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.example.score.dto.*;
-import com.example.score.entity.CollegeScore;
-import com.example.score.entity.TeScore;
+import com.example.score.pojo.dto.*;
 import com.example.score.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

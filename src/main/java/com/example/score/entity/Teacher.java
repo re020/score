@@ -23,6 +23,7 @@ public class Teacher {
 
     //学院id
     private int collegeId;
-
+    //教师权限
+    private int roleId;
 
 }

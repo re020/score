@@ -54,7 +54,7 @@
         select name from class
     </select>
 
-    <select id="geScore" resultType="com.example.score.dto.ClassScoreDTO">
+    <select id="geScore" resultType="com.example.score.pojo.dto.ClassScoreDTO">
         select teacher_score as teScore,
                teacher.name AS teName,
                class.name  as clName

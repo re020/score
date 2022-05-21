@@ -1,15 +1,13 @@
 package com.example.score;
 
-import com.example.score.dto.AllScoreDTO;
-import com.example.score.dto.StudentDTO;
+import com.example.score.pojo.dto.AllScoreDTO;
+import com.example.score.pojo.dto.StudentDTO;
 import com.example.score.entity.AllScore;
 import com.example.score.service.*;
-import com.example.score.service.impl.EnDoScoreServiceImpl;
-import com.example.score.dto.Subject;
+import com.example.score.pojo.dto.Subject;
 import com.example.score.entity.ClassTeacher;
 import com.example.score.entity.TeScore;
 import org.junit.jupiter.api.Test;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
@@ -35,6 +33,8 @@ public class EnDoTest {
     private CollegeScoreService collegeScoreService;
     @Autowired
     private EnDoService enDoService;
+    @Autowired
+    private ClassService classService;
 
     @Test
     public void test1(){
@@ -112,4 +112,6 @@ public class EnDoTest {
     public void test8(){
         enDoService.insertEnDoScore("2021-2022",1);
     }
+
+
 }

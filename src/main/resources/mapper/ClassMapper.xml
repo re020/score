@@ -15,4 +15,28 @@
         from class
     </select>
 
+    <insert id="classAdd" >
+        insert
+        into class
+        (class.name,class.college_id)
+        value (#{clName},#{collegeId})
+    </insert>
+
+    <delete id="classDelete">
+        delete class,class_teacher,class_student
+        From class
+        left join class_teacher
+        on class.id = class_teacher.class_id
+        left join class_student
+        on class.id = class_student.class_id
+        where class.id = #{classId}
+    </delete>
+
+    <update id="classUpdate" >
+        UPDATE class
+        set name = #{clName} , college_id = #{collegeId}
+        where id = #{classId}
+    </update>
+
+
 </mapper>

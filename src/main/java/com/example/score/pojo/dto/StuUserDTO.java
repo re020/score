@@ -1,6 +1,4 @@
-package com.example.score.dto;
-
-import lombok.Data;
+package com.example.score.pojo.dto;
 
 
 public class StuUserDTO {

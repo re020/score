@@ -18,4 +18,27 @@
         and seme = #{seme}
     </select>
 
+    <insert id="classTeAdd">
+        insert into
+        class_teacher
+        (class_id,teacher_id)
+        value (#{classId},#{teId})
+    </insert>
+
+    <update id="subjectAdd">
+        update class_teacher
+        set subject = #{subject},academic_year = #{acaYear},seme = #{seme}
+        where id = #{classTeId}
+    </update>
+
+    <delete id="classTeDelete">
+        delete
+        from class_teacher
+        where class_id = #{classId}
+    </delete>
+
+    <select id="getClassTeacher" resultMap="BaseResultMap">
+        select * from class_teacher
+        where class_id = #{classId}
+    </select>
 </mapper>

@@ -27,7 +27,7 @@
         <result column="password" property="passWd"/>
         <result column="college_id" property="collegeId"/>
     </resultMap>
-    <resultMap id="SuMap" type="com.example.score.dto.Subject">
+    <resultMap id="SuMap" type="com.example.score.pojo.dto.Subject">
         <result column="name" property="teacher"/>
         <result column="id" property="teId"/>
         <!--<result column="" property="subject"/>-->
@@ -100,7 +100,7 @@
           AND seme = #{seme}
     </select>
 
-    <select id="geTeClassScore" resultType="com.example.score.dto.ClassScoreDTO">
+    <select id="geTeClassScore" resultType="com.example.score.pojo.dto.ClassScoreDTO">
         select teacher_score as teScore,
                teacher.name AS teName,
                class.name  as clName
@@ -118,7 +118,7 @@
             select college_id from teacher where te_number = #{teNum}
         </select>
 
-    <select id="geTeCollegeScore" resultType="com.example.score.dto.CollegeScoreDTO">
+    <select id="geTeCollegeScore" resultType="com.example.score.pojo.dto.CollegeScoreDTO">
         select teacher_score as teScore,
                teacher.name  as teName
         from college_te_score

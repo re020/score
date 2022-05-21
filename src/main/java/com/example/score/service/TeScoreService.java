@@ -1,10 +1,9 @@
 package com.example.score.service;
 
 import com.example.score.dao.TeScoreMapper;
-import com.example.score.dto.ClassScoreDTO;
+import com.example.score.pojo.dto.ClassScoreDTO;
 import com.example.score.entity.AllScore;
 import com.example.score.entity.TeScore;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,18 +35,39 @@ public class TeScoreService {
         return teScoreMapper.selectScore(teId,classId,acaYear,seme);
     }
 
+    /**
+     *
+     * @param teScore
+     * @return
+     */
     public Integer insertTeScore(TeScore teScore){
         return teScoreMapper.insertTeScore(teScore);
     }
 
+    /**
+     *
+     * @param teScore
+     * @return
+     */
     public Integer insertFinalScore(TeScore teScore){
         return teScoreMapper.insertFinalScore(teScore);
     }
 
+    /**
+     *
+     * @return
+     */
     public List<String> getClNames(){
         return teScoreMapper.getClNames();
     }
 
+    /**
+     *
+     * @param clName
+     * @param acaYear
+     * @param seme
+     * @return
+     */
     public List<ClassScoreDTO> getScore(String clName , String acaYear , int seme){
         return teScoreMapper.geScore(clName,acaYear,seme);
     }

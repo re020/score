@@ -17,6 +17,21 @@ public class ClassService {
      * @return
      */
     public List<Integer> getClassList(){
-       return classMapper.getClassList();
+        return classMapper.getClassList();
     }
+
+    public Integer classAdd(String clName,int collegeId){
+        return classMapper.classAdd(clName,collegeId);
+    }
+
+
+    public Integer classDelete(int classId){
+        return classMapper.classDelete(classId);
+    }
+
+    public Integer classUpdate(String clName,int collegeId,int classId){
+        return classMapper.classUpdate(clName,collegeId,classId);
+    }
+
+
 }

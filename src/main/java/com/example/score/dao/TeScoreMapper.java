@@ -1,6 +1,6 @@
 package com.example.score.dao;
 
-import com.example.score.dto.ClassScoreDTO;
+import com.example.score.pojo.dto.ClassScoreDTO;
 import com.example.score.entity.AllScore;
 
 import com.example.score.entity.TeScore;

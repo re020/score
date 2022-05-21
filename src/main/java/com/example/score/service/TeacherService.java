@@ -1,11 +1,9 @@
 package com.example.score.service;
 
-import com.example.score.dao.TeacherMapper;
-import com.example.score.dto.ClassScoreDTO;
-import com.example.score.dto.CollegeScoreDTO;
-import com.example.score.dto.Subject;
+import com.example.score.pojo.dto.ClassScoreDTO;
+import com.example.score.pojo.dto.CollegeScoreDTO;
+import com.example.score.pojo.dto.Subject;
 import com.example.score.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
@@ -75,14 +73,43 @@ public interface TeacherService {
      */
     public List<Subject> getTeList(int classId,String acaYear,int seme);
 
+    /**
+     *
+     * @param teId
+     * @return
+     */
     public int getTeCollegeId(int teId);
 
+    /**
+     *
+     * @param clName
+     * @param acaYear
+     * @param seme
+     * @return
+     */
     public List<ClassScoreDTO> geTeClassScore(String clName,String acaYear,int seme);
 
+    /**
+     *
+     * @param college
+     * @param acaYear
+     * @param seme
+     * @return
+     */
     public List<CollegeScoreDTO> geTeCollegeScore(int college, String acaYear, int seme);
 
+    /**
+     *
+     * @param teNum
+     * @return
+     */
     public int getCollegeIdByTeNum(String teNum);
 
+    /**
+     *
+     * @param teName
+     * @return
+     */
     public int getTeIdByTeName(String teName);
 
     /**
