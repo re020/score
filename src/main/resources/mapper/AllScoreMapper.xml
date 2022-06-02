@@ -69,6 +69,20 @@
     </select>
 
 
+    <select id="getFirstScore" resultType="BigDecimal">
+        select teacher_score as teScore
+        from (all_score
+            inner join student
+            on all_score.student_id = student.id)
+                 inner join class
+                            on class.id=all_score.class_id
+        WHERE class.id = #{classId}
+          AND sno = #{stuNum}
+          AND teacher_id = #{teId}
+          AND all_score.academic_year = #{acaYear}
+          AND seme = #{seme}
+    </select>
+
     <!-- <insert id="insertTeScore">
          insert id,class_id,teacher_id,student_id,teacher_score,academic_year,seme
           into all_score value (#{as.asId},#{as.classId},#{as.teId},#{as.stuId},#{as.teScore},

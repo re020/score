@@ -7,6 +7,7 @@ import com.example.score.entity.TeScore;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Mapper
@@ -36,4 +37,6 @@ public interface TeScoreMapper {
     List<String> getClNames();
 
     List<ClassScoreDTO> geScore(@Param("clName") String clName,@Param("acaYear") String acaYear,@Param("seme") int seme);
- }
+
+    BigDecimal getFirstScore(@Param("classId") int classId ,@Param("stuNum") String stuNum,@Param("teId") int teId,@Param("acaYear") String acaYear ,@Param("seme") int seme);
+}

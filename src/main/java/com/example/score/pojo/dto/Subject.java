@@ -3,6 +3,7 @@ package com.example.score.pojo.dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 public class Subject implements Serializable {
@@ -12,7 +13,6 @@ public class Subject implements Serializable {
     private int teId;
     private String subject;
     private String teacher;
-
-
+    private BigDecimal teScore;
 
 }

@@ -1,23 +1,28 @@
 package com.example.score.dao;
 
+import com.example.score.pojo.DO.StudentDO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface UserMapper {
 
-    Integer teAdd(@Param("te_number") String teNum,@Param("name") String teName,@Param("password") String passWd,@Param("college_id") int collegeId,@Param("role_id") int roleId);
+    Integer teAdd(@Param("teNum") String teNum,@Param("teName") String teName,@Param("passWd") String passWd,@Param("collegeId") int collegeId,@Param("roleId") int roleId);
 
 
-    Integer stuAdd(@Param("sno") String stuNum,@Param("password") String passWd,@Param("name") String stuName);
+    Integer stuAdd(@Param("stuNum") String stuNum,@Param("passWd") String passWd,@Param("stuName") String stuName);
 
+    List<StudentDO> selectStudent(@Param("stuNum") String stuNum ,@Param("stuName") String stuName);
 
-    Integer teDelete();
+    Integer teDelete(int teId);
 
-    Integer stuDelete();
+    Integer stuDelete(int stuId);
 
-    Integer teUpdate();
+    Integer teUpdate(@Param("teNum") String teNum,@Param("teName") String teName,@Param("passWd") String passWd,@Param("collegeId") int collegeId,@Param("roleId") int roleId,@Param("teId") int teId);
 
-    Integer stuUpdate();
+    Integer stuUpdate(@Param("stuNum") String stuNum,@Param("passWd") String passWd,@Param("stuName") String stuName,@Param("stuId") int stuId);
+
 
 }

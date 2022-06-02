@@ -45,4 +45,6 @@ public interface StudentMapper {
     AllScore getByStuNum(String stuNum);
 
     Student getStudentByUsername(@Param("sno") String username);
+
+
 }

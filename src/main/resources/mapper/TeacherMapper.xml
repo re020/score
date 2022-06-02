@@ -151,4 +151,17 @@
         FROM teacher
         WHERE tno = #{tno}
     </select>
+
+    <select id="getRole" resultType="String">
+        select role_name
+        from role
+        inner join teacher
+        on role.role_id = teacher.role_id
+        where te_number = #{teNum}
+    </select>
+
+    <select id="getRoleId" resultType="Integer">
+        select role_id from role where role_name = #{roleName}
+    </select>
+
 </mapper>

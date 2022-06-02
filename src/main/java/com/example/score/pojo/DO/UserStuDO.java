@@ -1,13 +1,9 @@
-package com.example.score.entity;
+package com.example.score.pojo.DO;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
-/**
- * 学生表
- */
 @Data
-public class Student {
+public class UserStuDO {
 
     //id
     private int stuId;
@@ -20,7 +16,5 @@ public class Student {
 
     //密码
     private String passWd;
-
-
 
 }

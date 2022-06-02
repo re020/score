@@ -11,7 +11,11 @@
         <result column="teacher_id" property="teId"/>
         <result column="academic_year" property="acaYear"/>
     </resultMap>
-
+    <resultMap id="SuMap" type="com.example.score.pojo.DO.SubjectDO">
+        <result column="name" property="teName"/>
+        <result column="id" property="classTeId"/>
+        <result column="academic_year" property="acaYear"/>
+    </resultMap>
     <select id="select" resultMap="BaseResultMap">
         select * from class_teacher
         where academic_year = #{acaYear}
@@ -34,11 +38,53 @@
     <delete id="classTeDelete">
         delete
         from class_teacher
-        where class_id = #{classId}
+        where id = #{classTeId}
     </delete>
 
-    <select id="getClassTeacher" resultMap="BaseResultMap">
-        select * from class_teacher
-        where class_id = #{classId}
+    <select id="getClassTeacher" resultMap="SuMap">
+        SELECT teacher.`name`,class_teacher.`subject`,class_teacher.academic_year,seme
+        FROM teacher
+        INNER JOIN class_teacher
+        ON teacher.id = class_teacher.teacher_id
+        WHERE class_teacher.class_id = #{classId}
     </select>
+
+    <select id="selectClassTeacherBy" resultMap="SuMap">
+        SELECT teacher.`name`,class_teacher.`subject`,class_teacher.id,class_teacher.academic_year,seme
+        FROM teacher
+        INNER JOIN class_teacher
+        ON teacher.id = class_teacher.teacher_id
+        <where>
+            class_teacher.class_id = #{classId}
+            <if test="subject !=null and subject != ''">
+                AND class_teacher.subject = #{subject}
+            </if>
+            <if test="teName != null and teName != ''">
+                AND teacher.name = #{teName}
+            </if>
+            <if test="acaYear != null and acaYear != ''" >
+                AND class_teacher.academic_year = #{acaYear}
+            </if>
+            <if test="seme != null and seme != ''">
+                 AND seme = #{seme}
+            </if>
+        </where>
+    </select>
+
+    <select id="getAllTeacher" resultType="com.example.score.pojo.DO.TeacherDO">
+        select teacher.id as teId,teacher.te_number as teNum, teacher.name as teName ,college.name as collegeName,password as passWd
+        from teacher
+        inner join college
+        on teacher.college_id = college.id
+        <where>
+                true
+            <if test="teName != null and teName != ''">
+                AND teacher.name = #{teName}
+            </if>
+            <if test="collegeName != null and collegeName != ''">
+                and college.name = #{collegeName}
+            </if>
+        </where>
+    </select>
+
 </mapper>

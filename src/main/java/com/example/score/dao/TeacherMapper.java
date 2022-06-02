@@ -90,5 +90,10 @@ public interface TeacherMapper {
 
     Integer getTeIdByTeName(String teName);
 
-    Teacher getTeacherByName(@Param("tno") String username);
+    Teacher getTeacherByName(String username);
+
+
+    String getRole(String teNum);
+
+    Integer getRoleId(String roleName);
 }

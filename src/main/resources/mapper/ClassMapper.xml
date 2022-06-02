@@ -10,6 +10,8 @@
         <result column="name" property="className"/>
         <result column="college_id" property="collegeId"/>
     </resultMap>
+
+
     <select id="getClassList" resultType="int">
         select id
         from class
@@ -38,5 +40,22 @@
         where id = #{classId}
     </update>
 
+    <select id="getClassIdByClName" resultType="Integer">
+        select id from class where name = #{clName}
+    </select>
 
+    <select id="getAllClass" resultType="com.example.score.pojo.DO.ClassDO">
+        select class.name as clName , college.name as collegeName,class.id as classId
+        from class
+        inner join college
+        on class.college_id = college.id
+        <where>
+            <if test="clName != null and clName != ''">
+                class.name = #{clName}
+            </if>
+            <if test="collegeName != null and collegeName != ''">
+                AND college.name = #{collegeName}
+            </if>
+        </where>
+    </select>
 </mapper>

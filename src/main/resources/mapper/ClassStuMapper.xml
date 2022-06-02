@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.score.dao.ClassStuMapper">
+    <!-- sql语句-->
+    <resultMap id="stuMap" type="com.example.score.pojo.DO.StudentDO">
+        <id column="id" property="stuId"/>
+        <result column="sno" property="stuNum"/>
+        <result column="name" property="stuName"/>
+    </resultMap>
+    <select id="selectClassStudent" resultMap="stuMap">
+        select student.id,sno,name
+        from student
+            <if test="classId != null and classId != ''">
+                inner join class_student
+                on student.id = class_student.stu_id
+            </if>
+        <where>
+
+            <choose>
+                <when test="classId != 0 and classId != ''">
+                    true
+                </when>
+                <otherwise>
+                    student.id not in (select class_student.stu_id from class_student)
+                </otherwise>
+            </choose>
+
+            <if test="classId != 0 and classId != ''">
+                and class_id = #{classId}
+            </if>
+            <if test="stuNum != null and stuNum != ''">
+                and sno = #{stuNum}
+            </if>
+            <if test="stuName != null and stuNum != ''">
+                and name = #{stuName}
+            </if>
+
+        </where>
+    </select>
+
+    <insert id="classStuAdd">
+        insert into class_student (class_id,stu_id) value (#{classId},#{stuId})
+    </insert>
+
+    <delete id="classStuDelete">
+        delete from class_student where stu_id = #{stuId}
+    </delete>
+</mapper>

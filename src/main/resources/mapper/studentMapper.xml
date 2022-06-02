@@ -25,7 +25,6 @@
         <result column="sno" property="stuNum"/>
         <result column="password" property="passWd"/>
         <result column="name" property="teName"/>
-        <result column="class_id" property="classId"/>
     </resultMap>
 
     <resultMap id="stu" type="com.example.score.entity.Student">
@@ -33,11 +32,10 @@
         <result column="sno" property="stuNum"/>
         <result column="password" property="passWd"/>
         <result column="name" property="stuName"/>
-        <result column="class_id" property="classId"/>
     </resultMap>
 
     <sql id="student">
-        id, sno, password, name, class_id
+        id, sno, password, name
     </sql>
 
     <select id="getStudentByUsername" resultMap="stu">
@@ -64,17 +62,17 @@
     </select>
 
     <select id="getClassIdByStuId" resultType="int">
-        select class_id
-        from student
-        inner join class_student
+        select class_student.class_id
+        from class_student
+        inner join student
         on class_student.stu_id = student.id
         where student.sno = #{stuNum}
     </select>
 
     <select id="getByStuNum" resultType="com.example.score.entity.AllScore">
         select student.id as stuId , class_student.class_id as classId
-        from student
-        inner join class_student
+        from class_student
+        inner join student
         on class_student.stu_id = student.id
         where student.sno = #{stuNum}
     </select>

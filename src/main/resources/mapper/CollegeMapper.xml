@@ -6,4 +6,35 @@
 <mapper namespace="com.example.score.dao.CollegeMapper">
     <!-- sql语句-->
 
+    <resultMap id="BaseMap" type="com.example.score.pojo.DO.CollegeDO">
+        <id column="id" property="collegeId"/>
+        <result column="name" property="collegeName"/>
+    </resultMap>
+
+    <select id="getCollegeIdByName" resultType="Integer">
+        select id from college where name = #{collegeName}
+    </select>
+
+    <select id="getAllCollegeName" resultType="String">
+        select name from college
+    </select>
+
+    <select id="getAllCollege" resultMap="BaseMap">
+        select * from college
+    </select>
+
+    <insert id="collegeAdd">
+        insert into college (name) value (#{collegeName})
+    </insert>
+
+    <delete id="collegeDelete">
+        delete from college where id = #{collegeId}
+    </delete>
+
+    <update id="collegeUpdate">
+        update college
+        set name = #{collegeName}
+        where id = #{collegeId}
+    </update>
+
 </mapper>

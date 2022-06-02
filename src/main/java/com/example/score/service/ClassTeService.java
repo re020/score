@@ -2,6 +2,7 @@ package com.example.score.service;
 
 import com.example.score.dao.ClassTeMapper;
 import com.example.score.entity.ClassTeacher;
+import com.example.score.pojo.DO.TeacherDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +35,16 @@ public class ClassTeService {
        return classTeMapper.classTeDelete(classTeId);
    }
 
-   public List<ClassTeacher> getClassTeacher(int classId){
-       return classTeMapper.getClassTeacher(classId);
-   }
+    public List<ClassTeacher> getClassTeacher(int classId){
+        return classTeMapper.getClassTeacher(classId);
+    }
+
+    public List<ClassTeacher> selectClassTeacherBy(int classId,String teName,String subject,String acaYear,int seme){
+        return classTeMapper.selectClassTeacherBy(classId,teName,subject,acaYear,seme);
+    }
+
+    public List<TeacherDO> getAllTeacher(String teName,String collegeName){
+       return classTeMapper.getAllTeacher(teName,collegeName);
+    }
+
 }

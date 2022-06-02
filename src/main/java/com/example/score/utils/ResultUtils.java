@@ -2,7 +2,9 @@ package com.example.score.utils;
 
 import com.example.score.common.Result;
 
-public class ResultUtils {
+import java.io.Serializable;
+
+public class ResultUtils implements Serializable {
 
     public static Result success(Object data) {
         return success(200, "操作成功", data);

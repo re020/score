@@ -7,6 +7,7 @@ import com.example.score.entity.TeScore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -70,5 +71,9 @@ public class TeScoreService {
      */
     public List<ClassScoreDTO> getScore(String clName , String acaYear , int seme){
         return teScoreMapper.geScore(clName,acaYear,seme);
+    }
+
+    public BigDecimal getFirstScore(int classId,String stuNum,int teId,String acaYear,int seme){
+        return teScoreMapper.getFirstScore(classId,stuNum,teId,acaYear,seme);
     }
 }

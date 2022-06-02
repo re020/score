@@ -1,14 +1,9 @@
-package com.example.score.entity;
+package com.example.score.pojo.DO;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
-/**
- * 教师表
- */
 @Data
-public class Teacher {
-
+public class UserTeDO {
     //教师id
     private int teId;
 
@@ -22,9 +17,8 @@ public class Teacher {
     private String passWd;
 
     //学院id
-    private int collegeId;
+    private String collegeName;
 
     //教师权限
-    private int roleId;
-
+    private String roleName;
 }

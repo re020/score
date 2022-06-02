@@ -1,6 +1,7 @@
 package com.example.score.service;
 
 import com.example.score.dao.ClassMapper;
+import com.example.score.pojo.DO.ClassDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,11 @@ public class ClassService {
         return classMapper.classUpdate(clName,collegeId,classId);
     }
 
+    public Integer getClassIdByClName(String clName){
+        return classMapper.getClassIdByClName(clName);
+    }
 
+    public List<ClassDO> getAllClass(String clName,String collegeName){
+        return classMapper.getAllClass(clName,collegeName);
+    }
 }

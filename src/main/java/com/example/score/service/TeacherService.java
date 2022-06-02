@@ -110,7 +110,7 @@ public interface TeacherService {
      * @param teName
      * @return
      */
-    public int getTeIdByTeName(String teName);
+    public Integer getTeIdByTeName(String teName);
 
     /**
      * 通过教职工号查找教师
@@ -118,4 +118,8 @@ public interface TeacherService {
      * @return
      */
     Teacher findTeacherByName(String username);
+
+    String getRole(String teNum);
+
+    Integer getRoleId(String roleName);
 }

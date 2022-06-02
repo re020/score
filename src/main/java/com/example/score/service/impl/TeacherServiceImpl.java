@@ -115,7 +115,7 @@ public class TeacherServiceImpl implements TeacherService, UserService {
         return teacherMapper.getCollegeIdByTeNum(teNum);
     }
 
-    public int getTeIdByTeName(String teName){
+    public Integer getTeIdByTeName(String teName){
         return teacherMapper.getTeIdByTeName(teName);
     }
 
@@ -127,6 +127,16 @@ public class TeacherServiceImpl implements TeacherService, UserService {
     @Override
     public Teacher findTeacherByName(String username) {
         return teacherMapper.getTeacherByName(username);
+    }
+
+    @Override
+    public String getRole(String teNum) {
+        return teacherMapper.getRole(teNum);
+    }
+
+    @Override
+    public Integer getRoleId(String roleName) {
+        return teacherMapper.getRoleId(roleName);
     }
 
     @Override

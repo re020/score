@@ -1,8 +1,11 @@
 package com.example.score.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.example.score.common.Result;
+import com.example.score.pojo.DO.RoleDO;
 import com.example.score.pojo.dto.*;
 import com.example.score.service.*;
+import com.example.score.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -54,19 +57,30 @@ public class TeacherScoreRankingController {
 
     @RequestMapping("/enDoScore")
     @ResponseBody
-    public void enDoScore(@RequestBody ClassDTO classDTO){
-        System.out.println(classDTO);
-        enDoService.insetTeScore(classDTO.getAcaYear(),classDTO.getSeme());
-       enDoService.insertEnDoScore(classDTO.getAcaYear(),classDTO.getSeme());
+    public Result enDoScore(@RequestBody ClassDTO classDTO){
+        try {
+            System.out.println(classDTO);
+            enDoService.insetTeScore(classDTO.getAcaYear(),classDTO.getSeme());
+            enDoService.insertEnDoScore(classDTO.getAcaYear(),classDTO.getSeme());
+            return ResultUtils.success("赋分成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtils.fail("赋分失败");
+        }
+
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public String login(@RequestBody TeUserDTO teacher) {
         if (teacher.getPassWd().equals(teacherService.getTePassWd(teacher.getTeNum()))) {
-            return JSON.toJSONString(teacher.getTeNum());
+            String role = teacherService.getRole(teacher.getTeNum());
+            RoleDO roleDO = new RoleDO();
+            roleDO.setRoleName(role);
+            roleDO.setTeNum(teacher.getTeNum());
+            return JSON.toJSONString(roleDO);
         } else {
-            return JSON.toJSONString("工号或者密码错误");
+            return JSON.toJSONString(200);
         }
     }
 

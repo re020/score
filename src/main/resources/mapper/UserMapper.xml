@@ -5,5 +5,65 @@
 
 <mapper namespace="com.example.score.dao.UserMapper">
     <!-- sql语句-->
+    <resultMap id="stuMap" type="com.example.score.pojo.DO.StudentDO">
+        <id column="id" property="stuId"/>
+        <result column="sno" property="stuNum"/>
+        <result column="name" property="stuName"/>
+        <result column="password" property="passWd"/>
+    </resultMap>
+
+    <insert id="teAdd">
+        insert into teacher (te_number,name,password,college_id,role_id)
+        value (#{teNum},#{teName},#{passWd},#{collegeId},#{roleId})
+    </insert>
+
+    <insert id="stuAdd">
+        insert into student (sno,password,name)
+        value (#{stuNum},#{passWd},#{stuName})
+    </insert>
+
+    <select id="selectStudent" resultMap="stuMap">
+        select student.id,sno,student.name,password
+        from student
+        /*from (class_student
+        inner join student
+        on student.id = class_student.stu_id)*/
+        <where>
+            true
+            <if test="stuNum != null and stuNum != ''">
+                and sno = #{stuNum}
+            </if>
+            <if test="stuName != null and stuName != ''">
+                and student.name = #{stuName}
+            </if>
+        </where>
+    </select>
+
+    <delete id="teDelete" parameterType="java.lang.Integer">
+        delete teacher,class_teacher
+        from teacher
+        left join class_teacher
+        on teacher.id = class_teacher.teacher_id
+        where teacher.id = #{teId}
+    </delete>
+
+    <delete id="stuDelete" parameterType="java.lang.Integer">
+        delete student,class_student
+        from student
+        left join class_student
+        on student.id = class_student.stu_id
+        where student.id = #{stuId}
+    </delete>
+
+    <update id="teUpdate">
+        update teacher set te_number = #{teNum},name = #{teName},password = #{passWd},college_id = #{collegeId}
+                            ,role_id = #{roleId}
+        where id = #{teId}
+    </update>
+
+    <update id="stuUpdate">
+        update student set sno = #{stuNum},name = #{stuName},password = #{passWd}
+        where id = #{stuId}
+    </update>
 
 </mapper>
