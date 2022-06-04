@@ -13,7 +13,7 @@
     <select id="selectClassStudent" resultMap="stuMap">
         select student.id,sno,name
         from student
-            <if test="classId != null and classId != ''">
+            <if test="classId != 0 and classId != ''">
                 inner join class_student
                 on student.id = class_student.stu_id
             </if>

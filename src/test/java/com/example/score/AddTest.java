@@ -21,8 +21,8 @@ public class AddTest {
     }
     @Test
     public void test2(){
-        classService.classDelete(57);
-        classService.stuClassDelete(57);
+        /*classService.classDelete(57);
+        classService.stuClassDelete(57);*/
     }
 
 }

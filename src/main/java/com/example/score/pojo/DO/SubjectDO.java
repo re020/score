@@ -16,6 +16,7 @@ public class SubjectDO implements Serializable {
     private String subject;
     private String acaYear;
     private int seme;
+    private String clName;
 
 
 }

@@ -50,10 +50,12 @@
     </select>
 
     <select id="selectClassTeacherBy" resultMap="SuMap">
-        SELECT teacher.`name`,class_teacher.`subject`,class_teacher.id,class_teacher.academic_year,seme
-        FROM teacher
-        INNER JOIN class_teacher
-        ON teacher.id = class_teacher.teacher_id
+        SELECT teacher.`name`,class_teacher.`subject`,class_teacher.id,class_teacher.academic_year,seme,class.name as clName
+        FROM (class_teacher
+        INNER JOIN teacher
+        ON teacher.id = class_teacher.teacher_id)
+        inner join class
+        on class.id = class_teacher.class_id
         <where>
             class_teacher.class_id = #{classId}
             <if test="subject !=null and subject != ''">

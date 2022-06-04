@@ -70,6 +70,7 @@ public class AdminClassController {
     public Result classUpdate(@RequestBody ClassDO classDO){
 
         try {
+            System.out.println(classDO);
             Integer collegeId = collegeService.getCollegeIdByName(classDO.getCollegeName());
             // Integer classId = classService.getClassIdByClName(classDO.getClName());
             Integer i = classService.classUpdate(classDO.getClName(), collegeId, classDO.getClassId());

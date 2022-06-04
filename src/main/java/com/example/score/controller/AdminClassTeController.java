@@ -4,14 +4,12 @@ package com.example.score.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.score.common.Result;
 import com.example.score.entity.ClassTeacher;
-import com.example.score.pojo.DO.ClassDO;
 import com.example.score.pojo.DO.ClassTeDO;
 import com.example.score.pojo.DO.SubjectDO;
 import com.example.score.pojo.DO.TeacherDO;
 import com.example.score.pojo.dto.ClassTeDTO;
-import com.example.score.service.ClassService;
+import com.example.score.pojo.dto.ClassTeIdListDTO;
 import com.example.score.service.ClassTeService;
-import com.example.score.service.TeacherService;
 import com.example.score.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,10 +47,13 @@ public class AdminClassTeController {
 
     @RequestMapping("/classTeDelete")
     @ResponseBody
-    public Result classTeDelete(@RequestBody  SubjectDO subjectDO){
+    public Result classTeDelete(@RequestBody ClassTeIdListDTO teIdListDTO){
         try {
-            Integer i = classTeService.classTeDelete(subjectDO.getClassTeId());
-            return ResultUtils.success(i);
+            List<Integer> classTeIds = teIdListDTO.getClassTeId();
+            for (Integer classTeId : classTeIds) {
+                classTeService.classTeDelete(classTeId);
+            }
+            return ResultUtils.success(1);
         }catch (Exception e){
             e.printStackTrace();
             return ResultUtils.fail("删除失败");

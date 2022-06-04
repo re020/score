@@ -3,11 +3,9 @@ package com.example.score.controller;
 import com.alibaba.fastjson.JSON;
 import com.example.score.common.Result;
 import com.example.score.pojo.DO.ClassStuDO;
-import com.example.score.pojo.DO.ClassTeDO;
 import com.example.score.pojo.DO.StudentDO;
-import com.example.score.pojo.DO.TeacherDO;
 import com.example.score.pojo.dto.ClassStuDTO;
-import com.example.score.pojo.dto.ClassTeDTO;
+import com.example.score.pojo.dto.StuIdListDTO;
 import com.example.score.service.ClassStuService;
 import com.example.score.utils.ResultUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +45,13 @@ public class AdminClassStuController {
 
     @RequestMapping("/classStuDelete")
     @ResponseBody
-    public Result classTeAdd(@RequestBody  TeacherDO teacherDO){
+    public Result classTeAdd(@RequestBody StuIdListDTO stuIdListDTO){
        try {
-           Integer i = classStuService.classStuDelete(teacherDO.getTeId());
-           return ResultUtils.success(i);
+           List<Integer> stuIds = stuIdListDTO.getStuId();
+           for (Integer stuId : stuIds) {
+               classStuService.classStuDelete(stuId);
+           }
+           return ResultUtils.success(1);
        }catch (Exception e){
            e.printStackTrace();
            return ResultUtils.fail("删除失败");
